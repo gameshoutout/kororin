@@ -1,4 +1,4 @@
-# Random GitHub
+# Kororin
 
 A browser extension that takes you to a random active GitHub repo. Built for people new to GitHub â€” including non-coders.
 
@@ -18,7 +18,7 @@ When you land on a repo, a small card shows what kind of project it is and a ðŸŽ
 1. Open `chrome://extensions`
 2. Toggle **Developer mode** on (top right)
 3. Click **Load unpacked** and select this folder
-4. Click the puzzle-piece icon in the toolbar and pin **Random GitHub**
+4. Click the puzzle-piece icon in the toolbar and pin **Kororin**
 
 ### Firefox (121+)
 

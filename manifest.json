@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Random GitHub",
+  "name": "Kororin",
   "version": "0.1.0",
-  "description": "Discover random active GitHub repos. For people new to GitHub.",
+  "description": "Roll a random GitHub repo. For people new to GitHub.",
   "permissions": ["storage", "tabs"],
   "host_permissions": [
     "https://api.github.com/*",
@@ -15,7 +15,7 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Random GitHub",
+    "default_title": "Kororin",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
