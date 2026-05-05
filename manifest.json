@@ -32,5 +32,11 @@
       "css": ["content.css"],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "kororin@thesalleys.com",
+      "strict_min_version": "121.0"
+    }
+  }
 }
