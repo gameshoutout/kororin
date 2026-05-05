@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy — Kororin</title>
+<meta name="description" content="Kororin's privacy policy. Plain language, no surprises.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="icons/icon128.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/icon16.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,400..600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy: #1B2D4F;
+  --teal: #4FB6B3;
+  --teal-deep: #3A9794;
+  --mint: #F0F7F7;
+  --paper: #FFFFFF;
+  --muted: #5C6E84;
+  --border: #DCE8E7;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--mint);
+  color: var(--navy);
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 56px 24px 96px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 32px;
+}
+.back:hover { color: var(--navy); }
+
+.back svg { width: 14px; height: 14px; }
+
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
+  color: var(--navy);
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-family: 'Newsreader', serif;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 17px;
+  margin: 0 0 40px;
+}
+
+.last-updated {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 40px;
+  font-family: 'Poppins', sans-serif;
+}
+
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 40px 0 12px;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0 0 16px; }
+
+a {
+  color: var(--teal-deep);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+a:hover { color: var(--navy); }
+
+ul {
+  padding-left: 22px;
+  margin: 0 0 16px;
+}
+ul li { margin-bottom: 8px; }
+
+.tldr {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin-bottom: 32px;
+}
+.tldr .label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+  margin-bottom: 8px;
+  display: block;
+}
+.tldr p:last-child { margin-bottom: 0; }
+
+footer {
+  text-align: center;
+  padding: 56px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 56px;
+}
+footer a { color: var(--muted); text-decoration: none; margin: 0 10px; }
+footer a:hover { color: var(--navy); }
+
+@media (max-width: 540px) {
+  main { padding: 32px 20px 64px; }
+  h1 { font-size: 32px; }
+  h2 { font-size: 19px; }
+}
+</style>
+</head>
+<body>
+
+<main>
+  <a href="index.html" class="back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to Kororin
+  </a>
+
+  <h1>Privacy policy.</h1>
+  <p class="subtitle">Plain language. No surprises.</p>
+  <p class="last-updated">Last updated: November 2025</p>
+
+  <div class="tldr">
+    <span class="label">The short version</span>
+    <p>Kororin makes one search request to GitHub each time you click a mode. It doesn't run any servers, doesn't have user accounts, doesn't use analytics, and doesn't share data with anyone.</p>
+  </div>
+
+  <h2>What Kororin does on your computer</h2>
+  <p>When you click one of the four mode buttons, Kororin asks GitHub's public search API for a list of active repos matching that mode (for example, "good-first-issue" repos updated in the last 60 days). It picks one at random and opens it in a new tab.</p>
+
+  <h2>What Kororin stores</h2>
+  <p>Kororin uses your browser's <em>session storage</em> to remember which mode opened a given tab. This is so the small information card on a repo page knows whether to show "Beginner code" or "Words" in its header. This data:</p>
+  <ul>
+    <li>Stays on your computer.</li>
+    <li>Is automatically erased when you close the tab.</li>
+    <li>Is never sent to anyone.</li>
+  </ul>
+
+  <h2>What Kororin sends to GitHub</h2>
+  <p>Each click makes one request to <code>api.github.com</code>. That request includes the search query Kororin built (for example, <code>good-first-issues:&gt;3 archived:false stars:50..5000</code>) and the standard headers any web request includes (browser type, IP address). GitHub's own privacy practices apply to that request — see <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>.</p>
+  <p>Kororin does not use a GitHub account, OAuth token, or API key on your behalf. The requests are anonymous from GitHub's perspective, the same way browsing GitHub while signed out would be.</p>
+
+  <h2>What Kororin doesn't do</h2>
+  <ul>
+    <li>No user accounts. No sign-in.</li>
+    <li>No analytics or telemetry. Nothing tracks how often you click, which modes you use, or which repos you land on.</li>
+    <li>No third-party servers. Kororin has no backend at all.</li>
+    <li>No advertising. No tracking pixels. No cookies (Kororin doesn't set any).</li>
+    <li>No reading or modifying any GitHub page content beyond rendering the small overlay card on repo pages you opened through Kororin.</li>
+  </ul>
+
+  <h2>Permissions Kororin requests</h2>
+  <p>The browser will ask you to grant Kororin a few permissions when you install it. Here's what each one is for:</p>
+  <ul>
+    <li><strong>Storage</strong> — to keep the per-tab note about which mode opened the tab.</li>
+    <li><strong>Tabs</strong> — to open the random repo in a new tab.</li>
+    <li><strong>Access to <code>api.github.com</code></strong> — to make the search request.</li>
+    <li><strong>Access to <code>github.com</code></strong> — to render the small overlay card on repo pages you opened through Kororin.</li>
+  </ul>
+
+  <h2>Children</h2>
+  <p>Kororin doesn't collect personal information from anyone, so there's nothing special it does for users of any age. The tool is suitable for general audiences.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If anything about how Kororin works changes in a way that affects this policy, this page will be updated and the "last updated" date above will change. The full history is in the <a href="https://github.com/YOUR_USERNAME/kororin">GitHub repo</a>.</p>
+
+  <h2>Questions</h2>
+  <p>The best place to ask is the <a href="https://github.com/YOUR_USERNAME/kororin/issues">GitHub Issues</a> tab on the repo. Open an issue and someone will reply.</p>
+
+  <footer>
+    <p>
+      <a href="index.html">Home</a>
+      ·
+      <a href="https://github.com/YOUR_USERNAME/kororin">GitHub</a>
+    </p>
+  </footer>
+</main>
+
+</body>
+</html>

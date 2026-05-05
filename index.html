@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kororin — Roll a random GitHub repo</title>
+<meta name="description" content="A browser extension that opens a random active GitHub repo. For people new to GitHub — including non-coders.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="icons/icon128.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/icon16.png">
+
+<meta property="og:title" content="Kororin">
+<meta property="og:description" content="Roll a random GitHub repo.">
+<meta property="og:image" content="https://hellokororin.com/og-image.png">
+<meta property="og:url" content="https://hellokororin.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,400..600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy: #1B2D4F;
+  --navy-deep: #0E1C36;
+  --teal: #4FB6B3;
+  --teal-deep: #3A9794;
+  --mint: #F0F7F7;
+  --mint-soft: #F7FBFB;
+  --paper: #FFFFFF;
+  --muted: #5C6E84;
+  --border: #DCE8E7;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--mint);
+  color: var(--navy);
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.6;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 64px 24px 96px;
+}
+
+.hero {
+  text-align: center;
+  padding: 24px 0 48px;
+}
+
+.mascot-wrap {
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mascot {
+  width: 140px;
+  height: 140px;
+  display: block;
+  animation: kororin-breathe 4s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.mascot-wrap.hopping .mascot {
+  animation: kororin-hop 0.6s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.face-excited { opacity: 0; }
+
+.mascot-wrap.hopping .face-calm { animation: face-hide 0.6s ease-out; }
+.mascot-wrap.hopping .face-excited { animation: face-show 0.6s ease-out; }
+
+@keyframes face-show {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  78% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes face-hide {
+  0% { opacity: 1; }
+  20% { opacity: 0; }
+  78% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes kororin-breathe {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  50% { transform: translateY(-2px) scale(1.012, 1.012); }
+}
+
+@keyframes kororin-hop {
+  0% { transform: translateY(0) scale(1, 1); }
+  20% { transform: translateY(0) scale(1.08, 0.9); }
+  45% { transform: translateY(-22px) scale(0.95, 1.06); }
+  70% { transform: translateY(0) scale(1.06, 0.94); }
+  100% { transform: translateY(0) scale(1, 1); }
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 18px 0 4px;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.tagline {
+  font-family: 'Newsreader', serif;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--navy);
+  margin: 0 0 20px;
+  line-height: 1.3;
+}
+
+.subtagline {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 460px;
+  margin: 0 auto 32px;
+  line-height: 1.55;
+}
+
+.ctas {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--navy);
+  color: var(--paper);
+}
+.btn-primary:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(27, 45, 79, 0.18); }
+
+.coming-soon {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 24px;
+  font-style: italic;
+}
+
+.moods {
+  text-align: center;
+  padding: 8px 0 40px;
+}
+.moods-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+  margin: 0 0 24px;
+}
+.mood-row {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+.mood {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.mood svg { width: 84px; height: 84px; display: block; }
+.mood-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+section.block {
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+}
+
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  margin: 0 0 24px;
+  letter-spacing: -0.015em;
+  color: var(--navy);
+}
+
+.modes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.mode {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mode:hover {
+  border-color: var(--teal);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(79, 182, 179, 0.10);
+}
+
+.mode .emoji { font-size: 22px; line-height: 1; margin-bottom: 4px; }
+.mode .name { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 15px; color: var(--navy); }
+.mode .hint { font-size: 14px; color: var(--muted); line-height: 1.45; }
+
+ol.steps {
+  counter-reset: step;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+ol.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 14px 0 14px 52px;
+  border-bottom: 1px solid var(--border);
+  font-size: 17px;
+}
+ol.steps li:last-child { border-bottom: none; }
+ol.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--paper);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.privacy-note {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 26px;
+  font-size: 16px;
+  line-height: 1.55;
+}
+.privacy-note p { margin: 0 0 10px; }
+.privacy-note p:last-child { margin-bottom: 0; }
+.privacy-note a { color: var(--teal-deep); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.privacy-note a:hover { color: var(--navy); }
+
+footer {
+  text-align: center;
+  padding: 56px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+}
+footer a { color: var(--muted); text-decoration: none; margin: 0 10px; }
+footer a:hover { color: var(--navy); }
+.footer-mascot {
+  width: 44px;
+  height: 44px;
+  display: block;
+  margin: 0 auto 14px;
+}
+.made { font-style: italic; margin-top: 12px; }
+
+@media (max-width: 540px) {
+  main { padding: 40px 20px 64px; }
+  .hero { padding: 16px 0 32px; }
+  .mascot { width: 120px; height: 120px; }
+  h1 { font-size: 44px; }
+  .tagline { font-size: 19px; }
+  h2 { font-size: 22px; }
+  .modes-grid { grid-template-columns: 1fr; }
+  section.block { padding: 36px 0; }
+  .mood-row { gap: 24px; }
+  .mood svg { width: 70px; height: 70px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot { animation: none; }
+  .mascot-wrap.hopping .mascot,
+  .mascot-wrap.hopping .face-calm,
+  .mascot-wrap.hopping .face-excited { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<main>
+  <section class="hero">
+    <div class="mascot-wrap" id="mascotWrap" title="Click me!">
+      <svg class="mascot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Kororin, a smiling die mascot">
+        <ellipse cx="50" cy="94" rx="30" ry="3" fill="#000" opacity="0.07"/>
+        <ellipse cx="36" cy="84" rx="8" ry="5.5" fill="#4FB6B3" stroke="#1B2D4F" stroke-width="2.5"/>
+        <ellipse cx="64" cy="84" rx="8" ry="5.5" fill="#4FB6B3" stroke="#1B2D4F" stroke-width="2.5"/>
+        <rect x="20" y="20" width="60" height="60" rx="9" fill="#fff" stroke="#1B2D4F" stroke-width="2.5"/>
+
+        <g class="face-calm">
+          <circle cx="38" cy="42" r="5.5" fill="#1B2D4F"/>
+          <circle cx="62" cy="42" r="5.5" fill="#1B2D4F"/>
+          <circle cx="40" cy="40" r="1.8" fill="#fff"/>
+          <circle cx="64" cy="40" r="1.8" fill="#fff"/>
+          <path d="M 40 58 Q 50 68 60 58" stroke="#1B2D4F" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </g>
+
+        <g class="face-excited">
+          <path d="M 32 44 Q 38 36 44 44" stroke="#1B2D4F" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+          <path d="M 56 44 Q 62 36 68 44" stroke="#1B2D4F" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+          <path d="M 38 56 Q 50 70 62 56" stroke="#1B2D4F" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+        </g>
+      </svg>
+    </div>
+    <h1>Kororin</h1>
+    <p class="tagline">Roll a random GitHub repo.</p>
+    <p class="subtagline">A browser extension for people new to GitHub — including non-coders. Pick a vibe, click once, land somewhere new.</p>
+    <div class="ctas">
+      <a href="https://github.com/YOUR_USERNAME/kororin" class="btn btn-primary">View on GitHub →</a>
+    </div>
+    <p class="coming-soon">Coming soon to the Chrome Web Store and Firefox Add-ons.</p>
+  </section>
+
+  <section class="moods">
+    <p class="moods-label">Meet the moods</p>
+    <div class="mood-row">
+
+      <div class="mood">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Calm Kororin">
+          <ellipse cx="50" cy="94" rx="30" ry="3" fill="#000" opacity="0.07"/>
+          <ellipse cx="36" cy="84" rx="8" ry="5.5" fill="#4FB6B3" stroke="#1B2D4F" stroke-width="2.5"/>
+          <ellipse cx="64" cy="84" rx="8" ry="5.5" fill="#4FB6B3" stroke="#1B2D4F" stroke-width="2.5"/>
+          <rect x="20" y="20" width="60" height="60" rx="9" fill="#fff" stroke="#1B2D4F" stroke-width="2.5"/>
+          <circle cx="38" cy="42" r="5.5" fill="#1B2D4F"/>
+          <circle cx="62" cy="42" r="5.5" fill="#1B2D4F"/>
+          <circle cx="40" cy="40" r="1.8" fill="#fff"/>
+          <circle cx="64" cy="40" r="1.8" fill="#fff"/>
+          <path d="M 40 58 Q 50 68 60 58" stroke="#1B2D4F" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </svg>
+        <span class="mood-name">Calm</span>
+      </div>
+
+      <div class="mood">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Excited Kororin">
+          <ellipse cx="50" cy="94" rx="22" ry="2.5" fill="#000" opacity="0.06"/>
+          <g transform="translate(0 -8) rotate(-8 50 50)">
+            <ellipse cx="38" cy="82" rx="7" ry="5" fill="#4FB6B3" stroke="#1B2D4F" stroke-width="2.5"/>
+            <ellipse cx="62" cy="82" rx="7" ry="5" fill="#4FB6B3" stroke="#1B2D4F" stroke-width="2.5"/>
+            <rect x="20" y="20" width="60" height="60" rx="9" fill="#fff" stroke="#1B2D4F" stroke-width="2.5"/>
+            <path d="M 32 44 Q 38 36 44 44" stroke="#1B2D4F" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+            <path d="M 56 44 Q 62 36 68 44" stroke="#1B2D4F" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+            <path d="M 38 56 Q 50 70 62 56" stroke="#1B2D4F" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+          </g>
+        </svg>
+        <span class="mood-name">Excited</span>
+      </div>
+
+      <div class="mood">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Winking Kororin">
+          <ellipse cx="50" cy="94" rx="30" ry="3" fill="#000" opacity="0.07"/>
+          <ellipse cx="36" cy="84" rx="8" ry="5.5" fill="#4FB6B3" stroke="#1B2D4F" stroke-width="2.5"/>
+          <ellipse cx="64" cy="84" rx="8" ry="5.5" fill="#4FB6B3" stroke="#1B2D4F" stroke-width="2.5"/>
+          <rect x="20" y="20" width="60" height="60" rx="9" fill="#fff" stroke="#1B2D4F" stroke-width="2.5"/>
+          <circle cx="38" cy="42" r="5.5" fill="#1B2D4F"/>
+          <circle cx="40" cy="40" r="1.8" fill="#fff"/>
+          <path d="M 56 42 Q 62 36 68 42" stroke="#1B2D4F" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+          <path d="M 42 60 Q 50 67 58 60" stroke="#1B2D4F" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </svg>
+        <span class="mood-name">Wink</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Four ways to roll.</h2>
+    <div class="modes-grid">
+      <div class="mode">
+        <span class="emoji">🍀</span>
+        <span class="name">I'm feeling lucky</span>
+        <span class="hint">Anywhere on GitHub.</span>
+      </div>
+      <div class="mode">
+        <span class="emoji">✏️</span>
+        <span class="name">Words</span>
+        <span class="hint">Docs, typos, translations, awesome lists.</span>
+      </div>
+      <div class="mode">
+        <span class="emoji">🌱</span>
+        <span class="name">Beginner code</span>
+        <span class="hint">Repos with good-first-issue labels.</span>
+      </div>
+      <div class="mode">
+        <span class="emoji">🔧</span>
+        <span class="name">Deeper code</span>
+        <span class="hint">Repos asking for help past the first PR.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>How it works.</h2>
+    <ol class="steps">
+      <li>Click Kororin in your toolbar.</li>
+      <li>Pick a vibe.</li>
+      <li>A new tab opens with a random repo, plus a small card telling you what you found.</li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <h2>Privacy, simply.</h2>
+    <div class="privacy-note">
+      <p>One GitHub API call per click. No accounts, no tokens, no servers, no analytics.</p>
+      <p>A small per-tab note (which mode you came from) is kept in session storage and cleared when the tab closes.</p>
+      <p><a href="privacy.html">Read the full privacy policy →</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <svg class="footer-mascot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Winking Kororin">
+      <ellipse cx="50" cy="94" rx="30" ry="3" fill="#000" opacity="0.07"/>
+      <ellipse cx="36" cy="84" rx="8" ry="5.5" fill="#4FB6B3" stroke="#1B2D4F" stroke-width="2.5"/>
+      <ellipse cx="64" cy="84" rx="8" ry="5.5" fill="#4FB6B3" stroke="#1B2D4F" stroke-width="2.5"/>
+      <rect x="20" y="20" width="60" height="60" rx="9" fill="#fff" stroke="#1B2D4F" stroke-width="2.5"/>
+      <circle cx="38" cy="42" r="5.5" fill="#1B2D4F"/>
+      <circle cx="40" cy="40" r="1.8" fill="#fff"/>
+      <path d="M 56 42 Q 62 36 68 42" stroke="#1B2D4F" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+      <path d="M 42 60 Q 50 67 58 60" stroke="#1B2D4F" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    </svg>
+    <p>
+      <a href="https://github.com/YOUR_USERNAME/kororin">GitHub</a>
+      ·
+      <a href="privacy.html">Privacy</a>
+    </p>
+    <p class="made">Made with care.</p>
+  </footer>
+</main>
+
+<script>
+  const wrap = document.getElementById('mascotWrap');
+
+  function hop() {
+    wrap.classList.remove('hopping');
+    void wrap.offsetWidth;
+    wrap.classList.add('hopping');
+    setTimeout(() => wrap.classList.remove('hopping'), 600);
+  }
+
+  wrap.addEventListener('click', hop);
+
+  function scheduleHop() {
+    const delay = 8000 + Math.random() * 6000;
+    setTimeout(() => {
+      if (!document.hidden) hop();
+      scheduleHop();
+    }, delay);
+  }
+  scheduleHop();
+</script>
+
+</body>
+</html>
