@@ -36,7 +36,7 @@ async function searchRepos(query) {
   });
   if (!res.ok) {
     if (res.status === 403 || res.status === 429) {
-      throw new Error("GitHub's hourly limit hit. Try again in a bit.");
+      throw new Error("Kororin needs a tea break — GitHub limited us. Try again in an hour.");
     }
     throw new Error(`GitHub error: ${res.status}`);
   }
@@ -47,7 +47,7 @@ async function pickRandomRepo(mode) {
   const query = buildQuery(mode);
   const data = await searchRepos(query);
   const items = data.items || [];
-  if (!items.length) throw new Error('No repos found for that mode. Try another.');
+  if (!items.length) throw new Error("Hmm, Kororin couldn't find anything. Try a different vibe?");
   return items[Math.floor(Math.random() * items.length)];
 }
 

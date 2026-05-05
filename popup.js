@@ -4,6 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const mode = btn.dataset.mode;
       setBusy(true);
       hideError();
+
+      const mascot = document.getElementById('mascot');
+      mascot.classList.remove('hopping');
+      void mascot.offsetWidth;
+      mascot.classList.add('hopping');
+      await new Promise(r => setTimeout(r, 400));
+
       try {
         const res = await chrome.runtime.sendMessage({ action: 'openRandom', mode });
         if (res && res.ok === false) {

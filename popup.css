@@ -7,6 +7,24 @@ body {
   color: #1f2328;
 }
 
+#mascot {
+  display: block;
+  margin: 0 0 4px;
+  transform-origin: 50% 100%;
+}
+
+#mascot.hopping {
+  animation: kororin-hop 400ms ease-out;
+}
+
+@keyframes kororin-hop {
+  0%   { transform: translateY(0)     scale(1, 1); }
+  30%  { transform: translateY(-10px) scale(0.95, 1.05); }
+  60%  { transform: translateY(-2px)  scale(1, 1); }
+  85%  { transform: translateY(0)     scale(1.05, 0.92); }
+  100% { transform: translateY(0)     scale(1, 1); }
+}
+
 h1 {
   font-size: 16px;
   margin: 0 0 4px;

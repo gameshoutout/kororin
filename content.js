@@ -49,8 +49,18 @@ function renderOverlay(mode, repo) {
     <div class="rg-card-body">${renderBody(repo)}</div>
     <div class="rg-card-footer">
       <button class="rg-card-reroll">
-        <span class="rg-dice">🎲</span>
-        <span>Try another</span>
+        <svg class="rg-dice" width="18" height="18" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="50" cy="94" rx="30" ry="3" fill="#000" opacity="0.07"/>
+          <ellipse cx="36" cy="84" rx="8" ry="5.5" fill="#4FB6B3" stroke="#1B2D4F" stroke-width="2.5"/>
+          <ellipse cx="64" cy="84" rx="8" ry="5.5" fill="#4FB6B3" stroke="#1B2D4F" stroke-width="2.5"/>
+          <rect x="20" y="20" width="60" height="60" rx="9" fill="#fff" stroke="#1B2D4F" stroke-width="2.5"/>
+          <circle cx="38" cy="42" r="5.5" fill="#1B2D4F"/>
+          <circle cx="62" cy="42" r="5.5" fill="#1B2D4F"/>
+          <circle cx="40" cy="40" r="1.8" fill="#fff"/>
+          <circle cx="64" cy="40" r="1.8" fill="#fff"/>
+          <path d="M 40 58 Q 50 68 60 58" stroke="#1B2D4F" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </svg>
+        <span>Roll again</span>
       </button>
     </div>
   `;
