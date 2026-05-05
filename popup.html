@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>Random GitHub</h1>
+  <p class="tagline">Pick a vibe. We'll find you a repo.</p>
+
+  <div class="modes">
+    <button class="mode" data-mode="lucky">
+      <span class="emoji">🍀</span>
+      <span class="label">I'm Feeling Lucky</span>
+      <span class="hint">Anywhere on GitHub</span>
+    </button>
+    <button class="mode" data-mode="words">
+      <span class="emoji">✏️</span>
+      <span class="label">Words</span>
+      <span class="hint">Docs, typos, translations</span>
+    </button>
+    <button class="mode" data-mode="beginner">
+      <span class="emoji">🌱</span>
+      <span class="label">Beginner code</span>
+      <span class="hint">Good first issues</span>
+    </button>
+    <button class="mode" data-mode="deeper">
+      <span class="emoji">🔧</span>
+      <span class="label">Deeper code</span>
+      <span class="hint">Past your first PR</span>
+    </button>
+  </div>
+
+  <div id="error" class="error hidden"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

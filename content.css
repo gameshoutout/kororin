@@ -1,0 +1,121 @@
+#rg-card {
+  position: fixed;
+  top: 70px;
+  right: 16px;
+  width: 280px;
+  background: #fff;
+  border: 1px solid #d1d9e0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(31, 35, 40, 0.12);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: 12px;
+  color: #1f2328;
+  z-index: 99999;
+  overflow: hidden;
+  animation: rg-fadein 200ms ease-out;
+}
+
+@keyframes rg-fadein {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rg-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: #f6f8fa;
+  border-bottom: 1px solid #d1d9e0;
+  font-weight: 600;
+}
+
+.rg-card-emoji { font-size: 14px; line-height: 1; }
+.rg-card-mode { flex: 1; }
+
+.rg-card-close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #59636e;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+.rg-card-close:hover { color: #1f2328; }
+
+.rg-card-body {
+  padding: 10px;
+}
+
+.rg-desc {
+  color: #1f2328;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.rg-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+  gap: 8px;
+}
+.rg-key { color: #59636e; }
+.rg-val {
+  font-weight: 500;
+  text-align: right;
+  word-break: break-word;
+}
+
+.rg-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+.rg-topic {
+  background: #ddf4ff;
+  color: #0969da;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.rg-card-footer {
+  padding: 8px 10px;
+  background: #f6f8fa;
+  border-top: 1px solid #d1d9e0;
+}
+
+.rg-card-reroll {
+  width: 100%;
+  background: #1f883d;
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.rg-card-reroll:hover:not(:disabled) { background: #1a7f37; }
+.rg-card-reroll:disabled { background: #94d3a2; cursor: wait; }
+
+.rg-dice {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 1;
+}
+.rg-dice.spinning {
+  animation: rg-spin 0.6s linear infinite;
+}
+
+@keyframes rg-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
