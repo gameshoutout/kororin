@@ -1,14 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const mascot = document.getElementById('mascot');
+  function hopOnce() {
+    mascot.classList.remove('hopping');
+    void mascot.offsetWidth;
+    mascot.classList.add('hopping');
+  }
+  function scheduleHop() {
+    const delay = 2500 + Math.random() * 2500;
+    setTimeout(() => {
+      if (!document.hidden) hopOnce();
+      scheduleHop();
+    }, delay);
+  }
+  scheduleHop();
+
   document.querySelectorAll('.mode').forEach(btn => {
     btn.addEventListener('click', async () => {
       const mode = btn.dataset.mode;
       setBusy(true);
       hideError();
 
-      const mascot = document.getElementById('mascot');
-      mascot.classList.remove('hopping');
-      void mascot.offsetWidth;
-      mascot.classList.add('hopping');
+      hopOnce();
       await new Promise(r => setTimeout(r, 400));
 
       try {
