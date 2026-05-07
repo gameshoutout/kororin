@@ -504,7 +504,7 @@ footer a:hover { color: var(--navy); }
   wrap.addEventListener('click', hop);
 
   function scheduleHop() {
-    const delay = 8000 + Math.random() * 6000;
+    const delay = 2500 + Math.random() * 2500;
     setTimeout(() => {
       if (!document.hidden) hop();
       scheduleHop();
