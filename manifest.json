@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Kororin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Roll a random GitHub repo. For people new to GitHub.",
   "permissions": ["storage", "tabs"],
   "host_permissions": [
