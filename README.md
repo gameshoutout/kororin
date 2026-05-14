@@ -11,6 +11,12 @@ A browser extension that takes you to a random active GitHub repo. Built for peo
 
 When you land on a repo, a small card shows what kind of project it is and a 🎲 **Try another** button.
 
+## Install
+
+- [Chrome Web Store](https://chromewebstore.google.com/detail/kororin/jhngongojmgfaklkifokfabgbgaecdmf)
+- [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/kororin/)
+- [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/kororin/hcgoblbcpdmlhagidknmgbhgmkccamic)
+
 ## Install (developer mode)
 
 ### Chrome / Edge / Brave
